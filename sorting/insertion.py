@@ -4,19 +4,21 @@ import pyglet
 arr = None
 i, iteration = 1, 0
 previously_selected = None
+running = False
 
 
 # Set variables in readiness for iteration
 def init(array: list):
-    global arr, i, iteration, previously_selected
+    global arr, i, iteration, previously_selected, running
     arr = array
     i, iteration = 1, 0
     previously_selected = None
+    running = True
 
 
 # Iteration that would normally be found inside a while/for loop
 def iterate(dt):
-    global arr, i, iteration, previously_selected
+    global arr, i, iteration, previously_selected, running
 
     if previously_selected:
         previously_selected.unhighlight()
@@ -25,6 +27,7 @@ def iterate(dt):
     if iteration >= len(arr)-1:
         pyglet.clock.unschedule(iterate)
         print("Finished")
+        running = False
         return
     
     # End of an iteration

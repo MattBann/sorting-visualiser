@@ -86,12 +86,18 @@ def on_close():
     pyglet.app.exit()
 
 
+def is_algorithm_running():
+    if bubble.running or insertion.running:
+        return True
+
 # Run an algorithm. Pyglet clock controls iteration
 def run_bubble():
+    if is_algorithm_running(): return
     bubble.init(arr)
     pyglet.clock.schedule_interval(bubble.iterate, 1/60)
 
 def run_insertion():
+    if is_algorithm_running(): return
     insertion.init(arr)
     pyglet.clock.schedule_interval(insertion.iterate, 1.60)
 
