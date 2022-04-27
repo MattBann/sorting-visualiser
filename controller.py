@@ -3,6 +3,7 @@ import pyglet
 import visuals
 import sorting.bubble as bubble
 import sorting.insertion as insertion
+import sorting.bogo as bogo
 
 # Use foreground and background batch graphics processors to avoid layer issues
 controller_batch_background = pyglet.graphics.Batch()
@@ -87,8 +88,7 @@ def on_close():
 
 
 def is_algorithm_running():
-    if bubble.running or insertion.running:
-        return True
+    return bubble.running or insertion.running
 
 # Run an algorithm. Pyglet clock controls iteration
 def run_bubble():
@@ -99,7 +99,13 @@ def run_bubble():
 def run_insertion():
     if is_algorithm_running(): return
     insertion.init(arr)
-    pyglet.clock.schedule_interval(insertion.iterate, 1.60)
+    pyglet.clock.schedule_interval(insertion.iterate, 1/60)
+
+
+def run_bogo():
+    if is_algorithm_running(): return
+    bogo.init(arr)
+    pyglet.clock.schedule_interval(bogo.iterate, 1/60)
 
 
 # Create and return a list of elements that a drawn inside the control window, including buttons and labels
@@ -112,4 +118,5 @@ def create_control_window():
     elements.append(Button(160, 140, 80, 20, "Show", show_visuals))
     elements.append(Button(160, 80, 80, 20, "Bubble", run_bubble))
     elements.append(Button(160, 50, 80, 20, "Insertion", run_insertion))
+    elements.append(Button(160, 20, 80, 20, "Bogo", run_bogo))
     return elements
