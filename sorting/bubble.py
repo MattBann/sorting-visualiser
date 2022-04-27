@@ -4,7 +4,7 @@ import pyglet
 arr = None
 i, iteration = 0, 0
 previously_selected = None
-running = True
+running = False
 
 # Set variables in readiness for iteration
 def init(array: list):
